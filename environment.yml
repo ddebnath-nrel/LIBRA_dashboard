@@ -2,9 +2,9 @@ name: ml
 channels:
   - defaults
 dependencies:
-  - numpy
-  - pandas
-  - ipython
   - matplotlib
-  - ipywidgets
+  - ipython
   - python=3.10.4
+  - pandas
+  - ipywidgets
+  - watermark
