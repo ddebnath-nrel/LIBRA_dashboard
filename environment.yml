@@ -1,0 +1,10 @@
+name: ml
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - pandas
+  - ipython
+  - matplotlib
+  - ipywidgets
+  - python=3.10.4
