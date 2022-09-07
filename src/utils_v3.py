@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import numpy as np
+import textwrap
 
 from .plot_parameters import LinePlotParameters, StackPlotParameters, StyleParameters, ArrayType
 from typing import Optional
@@ -36,10 +37,11 @@ def make_lineplot(
                 linestyle=style_parameters.line_styles[style_idx],
                 color=style_parameters.colors[style_idx])
 
-    ax.set_title(plot_parameters.title)
+    ax.set_title(textwrap.fill(plot_parameters.title, width=30, break_long_words=True))
     if plot_parameters.is_exogenous_input:
-        ax.set_title(f"LIBRA input: {plot_parameters.title}")
-    ax.set_ylabel(plot_parameters.y_label)
+        ax.set_title(textwrap.fill(f"LIBRA input: {plot_parameters.title}", 
+            width=30, break_long_words=True))
+    ax.set_ylabel(textwrap.fill(plot_parameters.y_label, width=20, break_long_words=True))
 
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(
         lambda x, pos: '{:0,d}'.format(int(x))))
@@ -96,7 +98,7 @@ def make_comparative_lineplots(
                          col_name], linewidth=1.0, color='b')
                 plt.plot(input_df.loc[2030:end_year,
                          col_name], linewidth=3.0, color='k')
-        plt.title(stella_run)
+        plt.title(textwrap.fill(stella_run, width=30, break_long_words=True))
         ax[i].set_xlim([start_year, end_year])
         if plot_parameters.max_yval is not None:
             ax[i].set_ylim([0, plot_parameters.max_yval])
@@ -120,7 +122,7 @@ def make_comparative_lineplots(
                      ha='right',
                      va="center",
                      fontsize=14)
-    ax[0].set_ylabel(plot_parameters.y_label)
+    ax[0].set_ylabel(textwrap.fill(plot_parameters.y_label, width=20, break_long_words=True))
     plt.show()
 
 
@@ -151,8 +153,9 @@ def make_stackplot(df: pd.DataFrame,
     if plot_params.max_yval is not None:
         ax.set_ylim([0, plot_params.max_yval])
     if plot_params.is_exogenous_input:
-        ax.set_title(f"LIBRA input : {plot_params.title}: {run_name}", color="red")
-    ax.set_title(f"{plot_params.title}: {run_name}")
+        ax.set_title(textwrap.fill(f"LIBRA input : {plot_params.title}: {run_name}", 
+            width=30, break_long_words=True))
+    ax.set_title(textwrap.fill(f"{plot_params.title}: {run_name}", width=30, break_long_words=True))
     if plot_params.x_label is not None:
         ax.set_xlabel(plot_params.x_label)
     ax.set_ylabel(plot_params.y_label)
